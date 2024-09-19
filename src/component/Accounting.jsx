@@ -3,12 +3,15 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
+import { useDispatch } from "react-redux";
+import { addTransaction } from "../store/slice/transactionSlice";
 
 function Accounting() {
   const [radioValue, setRadioValue] = useState("");
   const [description, setDescription] = useState("");
   const [value, setValue] = useState("");
   const [errors, setErrors] = useState({});
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,7 +32,7 @@ function Accounting() {
     if (Object.keys(validationErrors).length === 0) {
       console.log("Form submitted");
     }
-    console.log(radioValue, description, value);
+    dispatch(addTransaction({ type: radioValue, description, value }));
   };
 
   return (
@@ -74,7 +77,7 @@ function Accounting() {
               className="input_no"
               placeholder="Value"
               value={value}
-              onChange={(e) => setValue(e.target.value)}
+              onChange={(e) => setValue(parseFloat(e.target.value))}
             />
             {errors.value && <p style={{ color: "red" }}>{errors.value}</p>}
           </div>

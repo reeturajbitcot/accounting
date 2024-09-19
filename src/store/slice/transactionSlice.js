@@ -1,42 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  total: 0,
-  debit: 0,
-  credit: 0,
+  creditList: [],
+  debitList: [],
 };
 
 export const accountingSlicer = createSlice({
   name: "accounting",
   initialState,
   reducers: {
-    addTotal: (state, action) => {
-      state.total += action.payload;
-    },
-    subtractTotal: (state, action) => {
-      state.total -= action.payload;
-    },
-    addDebit: (state, action) => {
-      state.debit += action.payload;
-    },
-    subtractDebit: (state, action) => {
-      state.debit -= action.payload;
-    },
-    addCredit: (state, action) => {
-      state.credit += action.payload;
-    },
-    subtractCredit: (state, action) => {
-      state.credit -= action.payload;
+    addTransaction: (state, action) => {
+      if (action.payload.type === "credit") {
+        state.creditList.push(action.payload);
+      } else {
+        state.debitList.push(action.payload);
+      }
     },
   },
 });
 
-export const {
-  addTotal,
-  subtractTotal,
-  addDebit,
-  subtractDebit,
-  addCredit,
-  subtractCredit,
-} = accountingSlicer.actions;
+export const { addTransaction } = accountingSlicer.actions;
 export default accountingSlicer.reducer;

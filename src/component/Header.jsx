@@ -3,14 +3,19 @@ import { getMonth, getYear } from "../lib/helperFunction";
 import { useSelector } from "react-redux";
 
 function Header() {
-  const finalValue = useSelector((state) => state.accounting.total);
-  const debitValue = useSelector((state) => state.accounting.debit);
-  const creditValue = useSelector((state) => state.accounting.credit);
+  let creditValue = 0;
+  let debitValue = 0;
+  const creditList = useSelector((state) => state.accounting.creditList);
+  const debitList = useSelector((state) => state.accounting.debitList);
+  creditList.map((item) => (creditValue += +item.value));
+  debitList.map((item) => (debitValue += +item.value));
+
+  console.log(creditValue, debitValue);
 
   return (
     <div className="d-flex justify-content-center flex-column">
       <p>{`Available Budget in ${getMonth()} ${getYear()}`}</p>
-      <p>{finalValue}</p>
+      <p>{creditValue - debitValue}</p>
       <div
         className="d-flex bg-success text-light justify-content-around"
         style={{ width: "400px" }}
