@@ -10,8 +10,6 @@ function Header() {
   creditList.map((item) => (creditValue += +item.value));
   debitList.map((item) => (debitValue += +item.value));
 
-  console.log(creditValue, debitValue);
-
   return (
     <div className="d-flex justify-content-center flex-column">
       <p>{`Available Budget in ${getMonth()} ${getYear()}`}</p>

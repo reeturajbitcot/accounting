@@ -5,6 +5,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import { useDispatch } from "react-redux";
 import { addTransaction } from "../store/slice/transactionSlice";
+import { v4 as uuidv4 } from "uuid";
 
 function Accounting() {
   const [radioValue, setRadioValue] = useState("");
@@ -32,7 +33,9 @@ function Accounting() {
     if (Object.keys(validationErrors).length === 0) {
       console.log("Form submitted");
     }
-    dispatch(addTransaction({ type: radioValue, description, value }));
+    dispatch(
+      addTransaction({ id: uuidv4(), type: radioValue, description, value })
+    );
   };
 
   return (
