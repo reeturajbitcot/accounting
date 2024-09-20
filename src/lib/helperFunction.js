@@ -11,12 +11,12 @@ export const getMonth = () => {
     "September",
     "October",
     "November",
-    "December",
+    "December"
   ];
   let d = new Date();
   return month[d.getMonth()];
 };
 export const getYear = () => {
   let d = new Date();
-  return d.getYear();
+  return d.getFullYear();
 };
